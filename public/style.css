@@ -230,7 +230,7 @@ section .title::after{
     width: 55%;
 }
 .about .about-content .right .text{
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 600;
     margin-bottom: 10px;
 }
@@ -258,6 +258,14 @@ section .title::after{
 }
 
 /* services section styling */
+
+#link{
+    border-radius: 6px;
+    width: calc(33% - 20px);
+    color:#fff;
+    text-decoration: none;
+  }
+
 .services, .teams{
     color:#fff;
     background: #111;
@@ -269,14 +277,13 @@ section .title::after{
 .services .title::after,
 .teams .title::after{
     background: #111;
-    content: "what i provide";
+    content: "what I studied";
 }
 .services .serv-content .card{
-    width: calc(33% - 20px);
+    padding: 50px 25px;
     background: #222;
     text-align: center;
     border-radius: 6px;
-    padding: 50px 25px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -363,16 +370,16 @@ section .title::after{
     background: crimson;
 }
 .skills-content .right .html::before{
-    width: 90%;
+    width: 100%;
 }
 .skills-content .right .css::before{
-    width: 60%;
+    width: 100%;
 }
 .skills-content .right .js::before{
     width: 80%;
 }
 .skills-content .right .php::before{
-    width: 50%;
+    width: 70%;
 }
 .skills-content .right .mysql::before{
     width: 70%;
@@ -619,7 +626,8 @@ footer span a:hover{
     .about .about-content .right{
         flex: 100%;
     }
-    .services .serv-content .card{
+
+    .services .serv-content #link{
         width: calc(50% - 10px);
         margin-bottom: 20px;
     }
@@ -643,9 +651,11 @@ footer span a:hover{
     .home .home-content a{
         font-size: 20px;
     }
-    .services .serv-content .card{
+
+    .services .serv-content #link{
         width: 100%;
     }
+
 }
 
 @media (max-width: 500px) {
@@ -653,11 +663,11 @@ footer span a:hover{
         font-size: 50px;
     }
     .home .home-content .text-3{
-        font-size: 27px;
+        font-size: 25px;
     }
     .about .about-content .right .text,
     .skills .skills-content .left .text{
-        font-size: 19px;
+        font-size: 17px;
     }
     .contact .right form .fields{
         flex-direction: column;
