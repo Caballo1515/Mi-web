@@ -1,3 +1,6 @@
+
+
+
 $(document).ready(function(){
     $(window).scroll(function(){
         // sticky navbar on scroll script
@@ -71,3 +74,65 @@ $(document).ready(function(){
         }
     });
 });
+
+var firebaseConfig = {
+    apiKey: "AIzaSyBaT2WId_JiB1R5ID1UYbstrsgkqPQYLNo",
+    authDomain: "alexandruresume.firebaseapp.com",
+    projectId: "alexandruresume",
+    storageBucket: "alexandruresume.appspot.com",
+    messagingSenderId: "712448087932",
+    appId: "1:712448087932:web:bccbc88852337f2854b6f9"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  
+var db = firebase.firestore();
+
+function add (){
+    console.log("ejecutando el envio de mensaje")
+    var nombre = document.getElementById("nombretextlabel").value;
+    var correo = document.getElementById("emailtextlabel").value;
+    var tema = document.getElementById("subjecttextlabel").value;
+    var mensaje = document.getElementById("messagetextlabel").value;
+    db.collection("users").add({
+        name: nombre,
+        mail: correo,
+        subject: tema,
+        message: mensaje
+    })
+    .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+        alert("The message has been sent");
+    })
+    .catch((error) => {
+        console.error("Error adding document: ", error);
+        alert("Error");
+    });
+    return false;
+}
+    
+window.onload = inicio;
+function inicio(){
+    
+    db.collection("users").add({
+        name: "nombre",
+        mail: "correo",
+        subject: "tema",
+        message: "mensaje"
+    })
+    .then((docRef) => {
+        var id;
+        id = docRef.id;
+        db.collection("users").doc(id).delete().then(() => {
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+    })
+    .catch((error) => {
+        console.error("Error adding document: ", error);
+    });
+    
+    
+    console.log("Web started");
+    document.querySelector("#sendmessage").onclick= add;
+}
