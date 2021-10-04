@@ -88,17 +88,52 @@ var firebaseConfig = {
   
 var db = firebase.firestore();
 
+var condicion = -1;
+
 function add (){
+
     console.log("ejecutando el envio de mensaje")
     var nombre = document.getElementById("nombretextlabel").value;
     var correo = document.getElementById("emailtextlabel").value;
     var tema = document.getElementById("subjecttextlabel").value;
     var mensaje = document.getElementById("messagetextlabel").value;
+    
+    var aux = new Date();
+    
+    var day = aux.getDate();
+    if (day<10){ 
+        day = '0' + day;
+    }
+    var month = aux.getMonth()+1;
+    if (month<10){ 
+        month = '0' + month;
+    }
+    var year = aux.getFullYear();
+    var hours = aux.getHours();
+    if (hours<10){ 
+        hours = '0' + hours;
+    }
+    var minutes = aux.getMinutes();
+    if (minutes<10){ 
+        minutes = '0' + minutes;
+    }
+    var seconds = aux.getSeconds();
+    if (seconds<10){ 
+        seconds = '0' + seconds;
+    }
+
+
+    
+    var today = day + '-' + month + '-' + year;
+    var time = hours + ':' + minutes + ':' + seconds;
+    var thisMoment = today + ' ' + time;
+
     db.collection("users").add({
         name: nombre,
         mail: correo,
         subject: tema,
-        message: mensaje
+        message: mensaje,
+        date: thisMoment 
     })
     .then((docRef) => {
         console.log("Document written with ID: ", docRef.id);
@@ -108,6 +143,8 @@ function add (){
         console.error("Error adding document: ", error);
         alert("Error");
     });
+    var usersRef = db.collection("users");
+    usersRef.orderBy("date");
     return false;
 }
     
@@ -115,10 +152,7 @@ window.onload = inicio;
 function inicio(){
     
     db.collection("users").add({
-        name: "nombre",
-        mail: "correo",
-        subject: "tema",
-        message: "mensaje"
+        date:"ERROR"
     })
     .then((docRef) => {
         var id;
